@@ -1,6 +1,7 @@
 package com.dmika.sarafan.controller;
 
 import com.dmika.sarafan.domain.Message;
+import com.dmika.sarafan.domain.User;
 import com.dmika.sarafan.domain.Views;
 import com.dmika.sarafan.dto.EventType;
 import com.dmika.sarafan.dto.MetaDto;
@@ -16,6 +17,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -59,9 +61,11 @@ public class MessageController {
     }
 
     @PostMapping
-    public Message create(@RequestBody Message message) throws IOException {
+    public Message create(@RequestBody Message message,
+                          @AuthenticationPrincipal User user) throws IOException {
         message.setCreationDate(LocalDateTime.now());
         fillMeta(message);
+        message.setAuthor(user);
         Message updateMessage = messageRepository.save(message);
 
         wsSender.accept(EventType.CREATE, updateMessage);
