@@ -15,18 +15,20 @@ repositories {
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compileOnly 'org.projectlombok:lombok'
 //    compile('org.postgresql:postgresql')
     compile 'mysql:mysql-connector-java'
     compile 'org.jsoup:jsoup:1.12.1'
-    compile('org.projectlombok:lombok')
+//    compile('org.projectlombok:lombok')
     compile('javax.xml.bind:jaxb-api')
-    compile('com.sun.xml.bind:jaxb-core')
-    compile('com.sun.xml.bind:jaxb-impl')
+//    compile('com.sun.xml.bind:jaxb-core')
+//    compile('com.sun.xml.bind:jaxb-impl')
     compile('org.springframework.boot:spring-boot-starter-security')
     compile('org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.0.0.RELEASE')
     compile('org.springframework.session:spring-session-jdbc')
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     compile("org.springframework.boot:spring-boot-starter-websocket")
+    annotationProcessor 'org.projectlombok:lombok'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     runtimeOnly 'org.springframework.boot:spring-boot-devtools'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

@@ -77,7 +77,8 @@ public class MessageController {
     public Message update(@PathVariable("id") Message messageFromDb,
                           @RequestBody Message message) throws IOException {
 
-        BeanUtils.copyProperties(message, messageFromDb, "id");
+//        BeanUtils.copyProperties(messageFromDb, message, "id");
+        messageFromDb.setText(message.getText());
         fillMeta(messageFromDb);
         Message updateMessage = messageRepository.save(messageFromDb);
 
@@ -122,12 +123,12 @@ public class MessageController {
     private MetaDto getMeta(String url) throws IOException {
 
         Document doc = Jsoup.connect(url).get();
-        Elements tite = doc.select("meta[name$=title], meta[property$=title]");
+        Elements title = doc.select("meta[name$=title], meta[property$=title]");
         Elements description = doc.select("meta[name$=description], meta[property$=description]");
         Elements cover = doc.select("meta[name$=image], meta[property$=image]");
 
         return new MetaDto(
-                getContent(tite.first()),
+                getContent(title.first()),
                 getContent(description.first()),
                 getContent(cover.first())
         );

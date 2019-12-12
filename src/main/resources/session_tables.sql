@@ -10,4 +10,4 @@ CREATE TABLE `spring_session` (
                                   UNIQUE KEY `SPRING_SESSION_IX1` (`SESSION_ID`),
                                   KEY `SPRING_SESSION_IX2` (`EXPIRY_TIME`),
                                   KEY `SPRING_SESSION_IX3` (`PRINCIPAL_NAME`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
